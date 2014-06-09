@@ -23,9 +23,13 @@
     <!-- Fixed navbar -->
     <?php include "navbar.php" ?>    
     <div class="container">
-        <div class="col-sm-12 page-header" align="left">
+      <div class="col-sm-3 page-header" align="right">
           <h2 class="demo-headline" style="color:#1ABC9C">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add &nbsp;&nbsp;Card</h2>
+            Add</h2>
+        </div>
+        <div class="col-sm-5 page-header" align="left">
+          <h2 class="demo-headline" style="color:#1ABC9C">
+            Card</h2>
         </div>
     </div>
         <!-- accessing database -->
@@ -55,21 +59,21 @@
             <!-- <label for="OldPassword">Old password</label> -->
             <label class="col-sm-3 lead" align='right'>Card ID</label>
             <div class="col-sm-5" align='left'>
-               <input type="text" class="form-control" id="exampleInputPassword1" name="cid" placeholder="Input card ID here"></input>
+               <input type="text" class="form-control" name="cid" placeholder="Input card ID here"></input>
             </div>  
           </div>
           <div class="form-group" >
             <!-- <label for="OldPassword">Old password</label> -->
             <label class="col-sm-3 lead" align='right'>Holder Name</label>
             <div class="col-sm-5" align='left'>
-               <input type="text" class="form-control" id="exampleInputPassword1" name="cname" placeholder="Input holder's name here"></input>
+               <input type="text" class="form-control" name="cname" placeholder="Input holder's name here"></input>
             </div>  
           </div>
           <div class="form-group" >
             <!-- <label for="OldPassword">Old password</label> -->
             <label class="col-sm-3 lead" align='right'>Department</label>
             <div class="col-sm-5" align='left'>
-               <input type="text" class="form-control" id="exampleInputPassword1" name="department" placeholder="Input user's department here"></input>
+               <input type="text" class="form-control" name="department" placeholder="Input user's department here"></input>
             </div>  
           </div>
           <div class="form-group" >
@@ -77,7 +81,7 @@
             <label class="col-sm-3 lead" align='right'>Type</label>
             <div class="col-sm-5" align='left'>
                <label class="radio">
-                  <input name="type" type="radio" value="1" data-toggle="radio" checked>Teacher</input>
+                  <input name="type" type="radio" value="1" data-toggle="radio" checked><size=18>Teacher</size></input>
                </label>
                <label class="radio">
                   <input name="type" type="radio" value="0" data-toggle="radio" >Student</input>

@@ -75,40 +75,6 @@
               &nbsp;&nbsp;&nbsp;
               <!-- <button type="reset" class="btn btn-default btn-wide" name="reset" value="reset">Reset</button> -->
             </div> 
-            
-            <!-- <div class="form-group" action="add_book.php" method="POST">
-
-              <label class="col-sm-2 lead" align='right'>Book ID</label>
-              <div class="col-sm-5" align='left'>
-                 <input type="text" class="form-control" name="bid" placeholder="Input book ID here"></input>
-              </div>  
-              <div class="col-sm-3" align='left'>
-                <button type="submit" class="btn btn-inverse" name="check" value="submit">Check Book Name</button>
-              </div>
-            </div>
-            <div class="form-group" >
-              <label class="col-sm-2 lead" align='right'>Book Name</label>
-              <div class="col-sm-5" align='left'>
-                 <?php
-                    //if (isset($_POST['check'])) {echo "<input type='text' class='form-control' name='bname' placeholder='.'/>";}
-                   // else {echo "<input type='text' class='form-control' name='bname' placeholder='Please click the [Check Book Name] bottom '/>";}
-                 ?>
-              </div>
-            </div>
-            <div class="form-group" >
-              <label class="col-sm-2 lead" align='right'>Card ID</label>
-              <div class="col-sm-5" align='left'>
-                 <input type="text" class="form-control" name="bid" placeholder="Input card ID here"></input>
-            </div> 
-            <div class="form-group">
-               <p/>
-            </div> 
-            <div class="col-sm-7" align='right'>
-              <button type="submit" class="btn btn-primary btn-wide" name="submit" value="submit">Submit</button>
-              &nbsp;&nbsp;&nbsp;
-              <button type="reset" class="btn btn-default btn-wide" name="reset" value="reset">Reset</button>
-             </div> -->
-            <!-- </div> -->
           </form>
           <!-- <form class="form-horizontal" id='9'> -->
 
