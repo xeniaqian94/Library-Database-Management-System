@@ -13,7 +13,7 @@
       <ul class="nav navbar-nav">
         <!-- <li class="active"><a href="index.php">Home</a></li> -->
         
-        <li><a href="#about">Search</a></li>
+        <li><a href="search.php">Search</a></li>
         <li><a href="borrow.php">Borrow</a></li>
         <li><a href="return.php">Return</a></li>     
         <li class="dropdown">

@@ -1,0 +1,66 @@
+#switch {
+    width: 500px;
+    height: 50px;
+    background-color: #3498db;
+    color: white;
+    cursor: pointer;
+    padding: 13px 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: background-color 0.5s ease 0s;
+    -moz-transition: background-color 0.5s ease 0s;
+    -ms-transition: background-color 0.5s ease 0s;
+    -o-transition: background-color 0.5s ease 0s;
+    transition: background-color 0.5s ease 0s;
+}
+#switch-menu {
+    background: #3498db;
+    position: absolute;
+    top: 48px;
+    left: 10px;
+    opacity: 0;
+    margin: 0;
+    padding-left: 0;
+    -webkit-transition: opacity 0.5s ease 0s;
+    -moz-transition: opacity 0.5s ease 0s;
+    -ms-transition: opacity 0.5s ease 0s;
+    -o-transition: opacity 0.5s ease 0s;
+    transition: opacity 0.5s ease 0s;
+}
+#switch-menu li {
+    list-style: none;
+    height: 0;
+    overflow: hidden;
+    -webkit-transition: height 0.5s ease 0s;
+    -moz-transition: height 0.5s ease 0s;
+    -ms-transition: height 0.5s ease 0s;
+    -o-transition: height 0.5s ease 0s;
+    transition: height 0.5s ease 0s;
+}
+#switch-menu li a {
+    display: block;
+    color: white;
+    width: 120px;
+    text-decoration: none;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -ms-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+    transition: all 0.5s ease 0s;
+}
+#switch:hover ul {
+    opacity: 1;
+}
+#switch:hover ul li {
+    height: 40px;
+    overflow: visible;
+}
+#switch:hover ul li a:hover {
+    padding-left: 15px;
+    background-color: #4aa3df;
+}

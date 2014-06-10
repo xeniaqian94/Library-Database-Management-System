@@ -23,7 +23,9 @@
     <?php include "navbar.php" ?>    
     <div class="container">
         <div class="col-sm-12 page-header" align="left">
-          <h2 class="demo-headline" style="color:#1ABC9C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add &nbsp;More &nbsp;Book</h2>
+          <div class="demo-headline" style="color:#1ABC9C">
+            <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add &nbsp;More &nbsp;Book</h2>
+          </div>
           <!-- <button type="submit" class="btn btn-primary btn-wide" name="submit" value="submit">Import</button> -->
         </div>
     
@@ -67,12 +69,12 @@
           <!-- 这部分的只实现了前端yet -->
           <form class="form-horizontal" action="add_more.php" method="POST">
             
-            <div class="col-sm-13" align="left">
-              <p> This page is created for import more books. If you'd like that, just click the following [Import] button. </p>
+            <div class="col-sm-6" align="left">
+              <p>This page is created for import more books. If you'd like that, just click the following [Import] button. </p>
             </div>
-            <div class="col-sm-8" align='left'>
+            <div class="col-sm-2" align='right'>
               <button type="submit" class="btn btn-primary btn-wide" name="submit" value="submit">Import</button>
-              &nbsp;&nbsp;&nbsp;
+              
               <!-- <button type="reset" class="btn btn-default btn-wide" name="reset" value="reset">Reset</button> -->
             </div> 
           </form>

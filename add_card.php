@@ -23,7 +23,7 @@
     <!-- Fixed navbar -->
     <?php include "navbar.php" ?>    
     <div class="container">
-      <div class="col-sm-3 page-header" align="right">
+        <div class="col-sm-3 page-header" align="right">
           <h2 class="demo-headline" style="color:#1ABC9C">
             Add</h2>
         </div>

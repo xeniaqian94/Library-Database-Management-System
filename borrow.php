@@ -60,15 +60,8 @@
         ?>
 
         <!-- page body -->
-        <!-- <div class="row clearfix"> -->
-
-          <!-- <div class="col-md-4 column"> -->
-          <!-- <form role="form" action="change_password.php" method="POST"> -->
-          <!-- 这部分的只实现了前端yet -->
-          <form class="form-horizontal" >
-
-            
-            <div class="form-group" action="borrow.php" method="POST">
+          <form class="form-horizontal" action="borrow.php" method="POST">          
+            <div class="form-group">
               <!-- <label for="OldPassword">Old password</label> -->
               <label class="col-sm-2 lead" align='right'>Book ID</label>
               <div class="col-sm-5" align='left'>
@@ -82,7 +75,7 @@
               <label class="col-sm-2 lead" align='right'>Book Name</label>
               <div class="col-sm-5" align='left'>
                  <?php
-                    if (isset($_POST['check'])) {echo "<input type='text' class='form-control' name='bname' placeholder='.'/>";}
+                    if (isset($_POST["check"])) {echo "<input type='text' class='form-control' name='bname' value='Specific Book Name'/>";}
                     else {echo "<input type='text' class='form-control' name='bname' placeholder='Please click the [Check Book Name] bottom '/>";}
                  ?>
               </div>
