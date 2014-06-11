@@ -40,11 +40,23 @@
               $author=$_POST["author"];
               $price=$_POST["price"];
               $total=$_POST["total"];
-              $sql = "INSERT INTO book VALUES ('$bid','$category','$bname','$publisher','$year','$author',$price,$total,$total);";
-              $arr=mysqli_query($con,$sql);
-              if ($arr) echo "<script>alert('Add Succeed!');window.location='add_one.php'</script>";
-              else echo "<script>alert('Add Failed!');window.location='add_one.php'</script>";
-              mysql_close($con);
+              // 判断这种书图书馆之前是否已经有了
+              $sql0="SELECT FROM book WHERE bid LIKE '%$bid%';";
+              $arr0=mysqli_query($con,$sql0);
+              if (mysqli_affected_rows($con))
+              {
+                $sql1="UPDATE book SET stock=stock+$total WHERE bid LIKE '%$bid%';";
+                $arr1=mysqli_query($con,$sql1);
+                echo "<script>alert('Book already exists. Stock changed!');window.location='add_one.php'</script>";
+              }
+              else if (!($arr0))
+              {
+                $sql = "INSERT INTO book VALUES ('$bid','$category','$bname','$publisher','$year','$author',$price,$total,$total);";
+                $arr=mysqli_query($con,$sql);
+                echo mysqli_errno($con);
+                if ($arr) echo "<script>alert('Add succeed!');window.location='add_one.php'</script>";
+                else echo "<script>alert('Add failed! Try again.');window.location='add_one.php'</script>";
+              }
             }
         ?>
 

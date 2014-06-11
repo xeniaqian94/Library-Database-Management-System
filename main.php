@@ -45,7 +45,7 @@
             <!-- 3) Borrow: <a href="http://getbootstrap.com/css/#buttons">Bootstrap buttons</a>, we have decided to add a new size: <code>btn-hg</code> which will be used for the main call to action buttons on the page: -->
           </p>
           <p>
-            3) Return: &nbsp; Where to <a href="return.php">return</a> books.
+            3) Return: &nbsp; <a href="return.php">Search </a>for your borrowed  books and <a href="return.php">Return</a> ONE every time.
             <!-- 4) Return: <a href="http://getbootstrap.com/css/#buttons">Bootstrap buttons</a>, we have decided to add a new size: <code>btn-hg</code> which will be used for the main call to action buttons on the page: -->
           </p>
           <p>

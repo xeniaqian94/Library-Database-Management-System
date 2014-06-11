@@ -81,7 +81,9 @@
                       </span>
                     </div>
                     <div class="col-md-2 column">
+
                       <button type="submit" name="submit" class="btn btn-primary btn-wide">Search</button>
+                      <!-- <div class="col-md-2 column"><br /></div> -->
                       <button type="reset" class="btn btn-default btn-wide">Reset</button>
                     </div>
 
@@ -108,7 +110,6 @@
               else
               {
                 $sql="SELECT * FROM book WHERE $select_by LIKE '%$keyword%' ORDER BY $order_by";
-                // $sql="SELECT * FROM book WHERE bid='00001';";
               }
             }
             else 
@@ -166,6 +167,6 @@
     <script src="js/bootstrap-switch.js"></script>
     <script src="js/flatui-checkbox.js"></script>
     <script src="js/flatui-radio.js"></script>
-    <script> $("select").selectpicker({style: 'btn-inverse', menuStyle: 'dropdown-inverse'})</script>
+    <script> $("select").selectpicker({style: 'btn-inverse btn-wide',menuStyle: 'dropdown-inverse'})</script>
   </body>
 </html>

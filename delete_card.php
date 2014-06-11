@@ -39,13 +39,12 @@
              $sql = "DELETE FROM card WHERE cid='$cid' AND cname='$cname'";
              $arr=mysqli_query($con,$sql);
              $ra=mysqli_affected_rows($con);
-             // echo mysqli_affected_rows($con);
              if (mysqli_affected_rows($con)==1) echo "<script>alert('Delete card succeed!');window.location='delete_card.php'</script>";
+             else if (mysqli_errno($con)==1451) echo "<script>alert('Delete card failed! Return your book first.');window.location='delete_card.php';</script>";
              else echo "<script>alert('Delete card failed! Please check your input.');window.location='delete_card.php';</script>";
-             mysql_close($con);
+             
           }
         ?>
-        
         <!-- page body -->
         
         <form class="form-horizontal" action="delete_card.php" method="POST">
@@ -65,7 +64,6 @@
             </div>  
           </div>
           
-         -->
           <div class="col-sm-8" align='right'>
             <button type="submit" class="btn btn-primary btn-wide" name="submit" value="submit">Delete</button>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
