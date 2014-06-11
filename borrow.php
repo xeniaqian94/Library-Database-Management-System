@@ -33,21 +33,13 @@
           if(isset($_GET['check']))
           {
               $thiscon=mysqli_connect("127.0.0.1","root","1324","library2");
-              
               $thisbid=$_GET["bid"];
-              $thissql="SELECT * FROM book WHERE bid='00001';";
+              // $thissql="SELECT * FROM book WHERE bid LIKE '%$bid%';";
+              $thissql="SELECT * FROM book WHERE bid LIKE '%$thisbid%';";
               $thisarr=mysqli_query($thiscon,$thissql);
               if ($thisarr) 
               {
                 $thisval=mysqli_fetch_row($thisarr);
-                echo "sql succeed!";
-              }
-              else echo "sql failed!";
-              if ($thisval) 
-              {
-                $thisbook=(mysqli_fetch_row($thisarr));
-                // echo $_GET["bid"];
-                echo $thisbook[0];
               }
           }
           if (isset($_GET['submit']))
@@ -72,7 +64,9 @@
                 if ($arr2&&$arr3) echo "<script>alert('Borrow succeed!');window.location='borrow.php'</script>";
                 else echo "<script>alert('Borrow Failed! Try again.');window.location='borrow.php'</script>";
               }
-              else echo "<script>alert('Borrow Failed! No Stock!');window.location='borrow.php'</script>";
+              else 
+              {
+                echo "<script>alert('No stock! Last return at ".$val[9]."');window.location='borrow.php'</script>";}
             }
           }
       ?>
@@ -81,21 +75,25 @@
             <div class="form-group">
               <label class="col-sm-2 lead" align='right'>Book ID</label>
               <div class="col-sm-5" align='left'>
-                 <input type="text" class="form-control" name="bid" placeholder="Input book ID here"></input>
+                 <?php 
+                    if (isset($_GET["check"])) {echo "<input type='text' class='form-control' name='bid' value='".$thisbid."'></input>";}
+                    else {echo "<input type='text' class='form-control' name='bid' placeholder='Input book ID here'/>";}
+                 ?>
+                 <!-- <input type="text" class="form-control" name="bid" placeholder="Input book ID here"></input> -->
               </div>  
               <div class="col-sm-3" align='left'>
-                <!-- <button type="submit" class="btn btn-inverse" name="check" value="submit">Check Book Name</button> -->
+                <button type="submit" class="btn btn-inverse" name="check" value="submit">Check Book Name</button>
               </div>
             </div>
-            <!-- <div class="form-group" >
+            <div class="form-group" >
               <label class="col-sm-2 lead" align='right'>Book Name</label>
               <div class="col-sm-5" align='left'>
                  <?php
-                    //if (isset($_GET["check"])) {echo "<input type='text' class='form-control' name='bname' placeholder='Book name as following.'/> &nbsp; &nbsp;&nbsp;Hint: this way";}
-                    //else {echo "<input type='text' class='form-control' name='bname' placeholder='Please click the [Check Book Name] bottom '/>";}
+                    if (isset($_GET["check"])) {echo "<input type='text' class='form-control' name='bname' value='".$thisval[2]."'></input>";}
+                    else {echo "<input type='text' class='form-control' name='bname' placeholder='Please click the [Check Book Name] bottom '/>";}
                  ?>
               </div>
-            </div> -->
+            </div> 
             <div class="form-group" >
               <label class="col-sm-2 lead" align='right'>Card ID</label>
               <div class="col-sm-5" align='left'>

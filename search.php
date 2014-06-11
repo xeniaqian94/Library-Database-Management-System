@@ -53,8 +53,8 @@
                           <option value="price">Price</option>
                         </select>
                         <select name="order_by">
-                          <option value="bid">Order By</option>
-                          <option value="bid">All</option>
+                          <option value="bname">Order By</option>
+                          <option value="bname">All</option>
                           <option value="bid">Book ID</option>
                           <option value="bname">Book Name</option>
                           <option value="publisher">Publisher</option>

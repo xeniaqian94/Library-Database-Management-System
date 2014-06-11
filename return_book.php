@@ -33,40 +33,36 @@
         </div>
         <div class="col-sm-12">&nbsp;</div>
         <?php
-          // if(isset($_GET['check']))
-          // {
-          //     $thiscon=mysqli_connect("127.0.0.1","root","1324","library2");
-              
-          //     $thisbid=$_GET['bid'];
-          //     $thissql="SELECT * FROM book WHERE bid LIKE '%$bid%';";
-          //     $thisarr=mysqli_query($thiscon,$thissql);
-          //     if ($thisarr) 
-          //     {
-          //       $thisval=mysqli_fetch_row($thisarr);
-          //       echo "sql succeed!";
-          //     }
-          //     else echo "sql failed!";
-          //     if ($thisval) 
-          //     {
-          //       $thisbook=(mysqli_fetch_row($thisarr));
-          //       // echo $_GET["bid"];
-          //       echo $thisbook[0];
-          //     }
-          // }
-
+          if(isset($_GET['check']))
+          {
+              $thiscon=mysqli_connect("127.0.0.1","root","1324","library2");
+              $thisbid=$_GET["bid"];
+              // $thissql="SELECT * FROM book WHERE bid LIKE '%$bid%';";
+              $thissql="SELECT * FROM book WHERE bid LIKE '%$thisbid%';";
+              $thisarr=mysqli_query($thiscon,$thissql);
+              if ($thisarr) 
+              {
+                $thisval=mysqli_fetch_row($thisarr);
+              }
+          }
           if (isset($_GET['submit']))
           {
             $con=mysqli_connect("127.0.0.1","root","1324","library2");
             $bid=$_GET['bid'];
             $cid=$_GET['cid'];
             $aid=$_SESSION['aid'];
-            $sql="DELETE FROM record WHERE bid LIKE '%$bid%' AND cid LIKE '%$cid%' LIMIT 1;";
-            $arr=mysqli_query($con,$sql);
-            if ($arr) 
+            if (mysqli_num_rows(mysqli_query($con,"SELECT * FROM record WHERE bid LIKE '%$bid%' AND cid LIKE '%$cid%';")))
             {
+              $sql="DELETE FROM record WHERE bid LIKE '%$bid%' AND cid LIKE '%$cid%' LIMIT 1;";
+              $arr=mysqli_query($con,$sql);
+              $sql2="UPDATE book SET lastreturn = now() WHERE bid LIKE '%$bid';";
+              mysqli_query($con,$sql2);
+              $sql2="UPDATE book SET stock=stock+1 WHERE bid LIKE '%$bid';";
+              mysqli_query($con,$sql2);
               echo "<script>alert('You have successfully returned one book!');window.location='return_book.php'</script>";
             }
-            else echo mysqli_errno($con)." ".mysqli_error($con);
+            // echo mysqli_errno($con)." ".mysqli_error($con);
+            else echo "<script>alert('Return Error! Please check your input.');window.location='return_book.php'</script>";
           }
       ?>
         <!-- page body -->
@@ -74,7 +70,11 @@
             <div class="form-group">
               <label class="col-sm-2 lead" align='right'>Book ID</label>
               <div class="col-sm-5" align='left'>
-                 <input type="text" class="form-control" name="bid" placeholder="Input book ID here"></input>
+                 <?php
+                    if (isset($_GET["check"])) {echo "<input type='text' class='form-control' name='bid' value='".$thisbid."'></input>";}
+                    else {echo "<input type='text' class='form-control' name='bid' placeholder='Input book ID here'/>";}
+                 ?>
+                 <!-- <input type="text" class="form-control" name="bid" placeholder="Input book ID here"></input> -->
               </div>  
               <div class="col-sm-3" align='left'>
                 <button type="submit" class="btn btn-inverse" name="check" value="submit">Check Book Name</button>
@@ -84,7 +84,7 @@
               <label class="col-sm-2 lead" align='right'>Book Name</label>
               <div class="col-sm-5" align='left'>
                  <?php
-                    if (isset($_GET["check"])) {echo "<input type='text' class='form-control' name='bname' placeholder='Book name as following.'/> &nbsp; &nbsp;&nbsp;Hint: this way";}
+                    if (isset($_GET["check"])) {echo "<input type='text' class='form-control' name='bname' value='".$thisval[2]."'></input>";}
                     else {echo "<input type='text' class='form-control' name='bname' placeholder='Please click the [Check Book Name] bottom '/>";}
                  ?>
               </div>

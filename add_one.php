@@ -47,6 +47,8 @@
               {
                 $sql1="UPDATE book SET stock=stock+$total WHERE bid LIKE '%$bid%';";
                 $arr1=mysqli_query($con,$sql1);
+                $sql1="UPDATE book SET total=total+$total WHERE bid LIKE '%$bid%';";
+                $arr1=mysqli_query($con,$sql1);
                 echo "<script>alert('Book already exists. Stock changed!');window.location='add_one.php'</script>";
               }
               else if (!($arr0))
