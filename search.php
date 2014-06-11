@@ -33,130 +33,126 @@
             Search &nbsp; Book</h2>
         </div>
     </div>
-        <?php
-          if(isset($_POST['submit']))
-          {
-             $con=mysqli_connect("127.0.0.1","root","1324","library2");
-             $cid = $_POST['cid'];
-             $cname = $_POST['cname'];
-             $sql = "DELETE FROM card WHERE cid='$cid' AND cname='$cname';";
-             $arr=mysqli_query($con,$sql);
-             if ($arr) echo "<script>alert('Delete Card Succeed!');window.location='delete_card.php'</script>";
-             else echo "<script>alert('Delete Card Failed!');window.location='delete_card.php';</script>";
-          }
-        ?>
-        
-        <!-- page body -->
     <div class="container">
-    <!-- <div class="panel panel-default"> -->
-      <!-- Default panel contents -->
       <form method="get" action="search.php">
-        <!-- <div class="input-group"> -->
-          <!-- <span class="input-group-addon"> -->
-           <div class="form-group"> 
-              <div class="col-md-3 column">
-                <select name="seltype" id="search_menu" class="slelect select-default">
-                  <option value="">搜索条件</option>
-                  <option value="all">显示全部</option>
-                  <option value="bno">书号</option>
-                  <option value="bname">书名</option>
-                  <option value="publisher">出版社</option》
-                  <option value="author">作者</option>
-                  <option value="year">年份</option>
-                  <option value="price">价格</option>
-                </select>
-              </div>
-              <div class="col-md-3 column" align="left">
-                <select name="order" class="slelect select-default">
-                  <option value="bno">排序条件</option>
-                  <option value="all">显示全部</option>
-                  <option value="bno">书号</option>
-                  <option value="bname">书名</option>
-                  <option value="publisher">出版社</option>
-                  <option value="author">作者</option>
-                  <option value="year">年份</option>
-                  <option value="price">价格</option>
-                </select>
-              </div>
-              <div class="col-md-3 column">
-                <!-- <span class="input-group-btn"> -->
-                  <div class="input-group">
-                      <input class="form-control" id="navbarInput-01" type="search" placeholder="Search">
-                      <span class="input-group-btn">
-                        <button type="submit" class="btn"><span class="fui-search"></span></button>
-                      </span>            
-                  </div>
-              </div>
-              <div class="col-md-3 column">
-                <button type="submit" class="btn btn-primary btn-wide" type="button" name="submit">Search</button>
-              </div>
-              <!-- </span> -->
+          <div class="panel panel-default">
+            <div class="panel-body">
+               <div class="form-group"> 
+                  <div class="row">
+                    <div class="col-md-3 column">
+                      <span class="input-group-lg">
+                        <select name="select_by">
+                          <option value="">Select By</option>
+                          <option value="all">All</option>
+                          <option value="bid">Book ID</option>
+                          <option value="bname">Book Name</option>
+                          <option value="category">Category</option>
+                          <option value="publisher">Publisher</option>
+                          <option value="author">Author</option>
+                          <option value="year">Year</option>
+                          <option value="price">Price</option>
+                        </select>
+                        <select name="order_by">
+                          <option value="bid">Order By</option>
+                          <option value="bid">All</option>
+                          <option value="bid">Book ID</option>
+                          <option value="bname">Book Name</option>
+                          <option value="publisher">Publisher</option>
+                          <option value="year">Year</option>
+                          <option value="price">Price</option>
+                        </select>
+                      </span>
+                    </div>
+                    <div class="col-md-7 column">
+                        <div class="col-md-12 column">
+                        <input class="form-control" type="text" name="keyword"placeholder="Keyword"></div>
+                        <div class="col-md-6 column">
+                          <div class="input-group">
+                            <span class="input-group-addon">From</span>
+                            <input type="text" class="form-control" name="lower" placeholder="the lower bound" />
+                          </div>
+                        </div>
+                        <div class="col-md-6 column">
+                          <div class="input-group">
+                            <span class="input-group-addon">To</span>
+                            <input type="text" class="form-control" name="upper" placeholder="the upper bound" />
+                          </div>
+                        </div>
+                      </span>
+                    </div>
+                    <div class="col-md-2 column">
+                      <button type="submit" name="submit" class="btn btn-primary btn-wide">Search</button>
+                      <button type="reset" class="btn btn-default btn-wide">Reset</button>
+                    </div>
+
+                  </div> 
+               </div> 
            </div>
-          
-           <div class="form-group">
-             <div class="col-md-6 column">
-              <input id="limit_up"  type="text" placeholder="上限" class="form-control" name ="up"></div>
-             <div class="col-md-6 column">
-              <input id="limit_down" type="text" placeholder="下限" class="form-control" name ="down"></div>
-           </div>
+               </div>
+            </div>
+          </div>
       </form>
       
-      
-      <!-- Table -->
-      
-        <?php
-        error_reporting(0);
-        
-        echo $_POST["submit"];
-        $con=mysqli_connect("127.0.0.1","root","1324","library");
-        $seltype=$_GET["seltype"];
-        $keyword=$_GET["keyword"];
-        $up=$_GET["up"];
-        $down=$_GET["down"];
-        $order=$_GET["order"];
-        
-        if($seltype=="all")
-          $sql="SELECT * FROM books;";
-        else{
-          if($up)
-             $sql = "SELECT * FROM books WHERE $seltype>=$up AND $seltype <= $down ORDER BY $order;";
-          else {
-             $sql = "SELECT * FROM books WHERE $seltype LIKE '%$keyword%' ORDER BY $order;";
+      <?php
+          if (isset($_GET["submit"]))
+          {
+            $con=mysqli_connect("127.0.0.1","root","1324","library2");
+            $select_by=$_GET["select_by"];
+            $order_by=$_GET["order_by"];
+            $lower=$_GET["lower"];
+            $upper=$_GET["upper"];
+            $keyword=$_GET["keyword"];
+            if (!($lower|$upper))
+            {
+              if ($select_by=="all") $sql="SELECT * FROM book ORDER BY $order_by;";
+              else
+              {
+                $sql="SELECT * FROM book WHERE $select_by LIKE '%$keyword%' ORDER BY $order_by";
+                // $sql="SELECT * FROM book WHERE bid='00001';";
+              }
+            }
+            else 
+            {
+              if ($select_by=="all") $sql="SELECT * FROM book WHERE $select_by>=$upper AND $select_by<=$lower ORDER BY $order_by;";
+              else
+              {
+                $sql="SELECT * FROM book WHERE $select_by LIKE '%$keyword%' AND $select_by>=$upper AND $select_by<=$lower ORDER BY $order_by";
+              }
+            }
+            
+            $arr=mysqli_query($con,$sql);
+            if($arr)
+            {
+              echo "<div class='container'>";
+              echo "<div class='panel panel-default'>";
+              echo "<div class='panel-body'>";
+              echo '<table class="table">';
+              echo '<tr>';
+              echo  "<td width='8%' align='center' >Book ID</th>";
+              echo  "<td width='18%' align='center' >Category</th>";
+              echo  "<td width='30%' align='center' >Book Name</th>";
+              echo  "<td width='19%' align='center' >Publisher</th>";
+              echo  "<td width='3%' align='center' >Year</th>";
+              echo  "<td width='20%' align='center' >Author</th>";
+              echo  "<td width='4%' align='center' >Price</th>";
+              echo  "<td width='4%' align='center' >Total</th>";
+              echo  "<td width='4%' align='center' >Stock</th>";
+              echo '</tr>';
+            }
+            while($val=mysqli_fetch_row($arr))
+            {
+               echo "<tr >";
+                for($i=0;$i<count($val);$i++)
+                {
+                        echo "<td align='center'>".$val[$i]."</td>";
+                }                
+                echo "</tr>";
+            }
+            echo "</table></div></div></div>";
           }
-        }
-        //if($seltype="no_select")
-          //$sql="SELECT * FROM books WHERE bname='oh,i'm not a book";
-        $arr=mysqli_query($con,$sql);
-        if($arr){
-          echo '<table class="table">';
-          echo'<div class="panel-heading" align="center">Search Result</div>';
-          echo '<tr>';
-          echo  "<td width='22%' align='center' >书名</td>";
-          echo  "<td width='12%' align='center' >类别</td>";
-          echo  "<td width='9%' align='center' >书号</td>";
-          echo  "<td width='13%' align='center' >出版社</td>";
-          echo  "<td width='8%' align='center' >年份</td>";
-          echo  "<td width='12%' align='center' >作者</td>";
-          echo  "<td width='7%' align='center' >价格</td>";
-          echo  "<td width='6%' align='center' >总量</td>";
-          echo  "<td width='6%' align='center' >库存</td>";
-          echo '</tr>';
-        }
-        while($val=mysqli_fetch_row($arr)){
-           echo "<tr >";
-        for($i=0;$i<count($val);$i++){
-                echo "<td align='center'>".$val[$i]."</td>";
-                //echo "<td align='center'><a href='update.php?id=$val[0]' target='_parent'>修改</a>|<a href='del.php?id=$val[0]' target='_parent''>删除</a>"."</td>";
-           }
-        echo "</tr>";
-      }
-
       ?>
-      
-      </table>
-      </div>
-      
-    </div> 
+    
+    </div>
     <!-- page footer-->
     <?php include "footer.php"; ?>
     <!-- Load JS here for greater good =============================-->
@@ -170,6 +166,6 @@
     <script src="js/bootstrap-switch.js"></script>
     <script src="js/flatui-checkbox.js"></script>
     <script src="js/flatui-radio.js"></script>
-    <script> $("select").selectpicker({style: 'btn-primary', menuStyle: 'dropdown-inverse'})</script>
+    <script> $("select").selectpicker({style: 'btn-inverse', menuStyle: 'dropdown-inverse'})</script>
   </body>
 </html>

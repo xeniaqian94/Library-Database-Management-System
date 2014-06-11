@@ -28,39 +28,31 @@
     </div>
         <!-- accessing database -->
     <div class="container">
+        
         <?php
-        if(isset($_POST['submit'])){
-          
-          $repeat_newpassword = $_POST['repeat_newpassword'];
-
-          if($input_newpassword != $repeat_newpassword){
-            echo "new passwords are different!";
-          }
-
-          else{
-            require_once 'connectvars.php'; 
-            $dbc = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
-            $user_id = mysqli_real_escape_string($dbc,trim($_SESSION['user_id']));
-            $query = "SELECT password FROM accounts WHERE user_id = '$user_id'";
-            $data = mysqli_query($dbc,$query);
-            if(mysqli_num_rows($data)==1){
-              $row = mysqli_fetch_array($data);
-              $oldpassword = $row['password'];
-              $md5_oldpassword = md5("$input_oldpassword");
-              echo $md5_oldpassword;
-              if($oldpassword == $md5_oldpassword){
-                $md5_newpassword = md5("$input_newpassword");
-                $user_id = $_SESSION['user_id'];
-                $query = "UPDATE accounts SET password = '$md5_newpassword' WHERE user_id = '$user_id'";
-                $data = mysqli_query($dbc,$query) or die ("update accounts failed!");
+          if(isset($_GET['check']))
+          {
+              $thiscon=mysqli_connect("127.0.0.1","root","1324","library2");
+              
+              $thisbid=$_GET["bid"];
+              $thissql="SELECT * FROM book WHERE bid='00001';";
+              $thisarr=mysqli_query($thiscon,$thissql);
+              if ($thisarr) 
+              {
+                $thisval=mysqli_fetch_row($thisarr);
+                echo "sql succeed!";
               }
-            }
+              else echo "sql failed!";
+              if ($thisval) 
+              {
+                $thisbook=(mysqli_fetch_row($thisarr));
+                // echo $_GET["bid"];
+                echo $thisbook[0];
+              }
           }
-        }
         ?>
-
         <!-- page body -->
-          <form class="form-horizontal" action="borrow.php" method="POST">          
+          <form class="form-horizontal" action="borrow.php" method="get">          
             <div class="form-group">
               <!-- <label for="OldPassword">Old password</label> -->
               <label class="col-sm-2 lead" align='right'>Book ID</label>
@@ -75,7 +67,7 @@
               <label class="col-sm-2 lead" align='right'>Book Name</label>
               <div class="col-sm-5" align='left'>
                  <?php
-                    if (isset($_POST["check"])) {echo "<input type='text' class='form-control' name='bname' value='Specific Book Name'/>";}
+                    if (isset($_GET["check"])) {echo "<input type='text' class='form-control' name='bname' placeholder='Book name as following.'/> &nbsp; &nbsp;&nbsp;Hint: this way";}
                     else {echo "<input type='text' class='form-control' name='bname' placeholder='Please click the [Check Book Name] bottom '/>";}
                  ?>
               </div>
