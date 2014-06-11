@@ -15,7 +15,14 @@
         
         <li><a href="search.php">Search</a></li>
         <li><a href="borrow.php">Borrow</a></li>
-        <li><a href="return.php">Return</a></li>     
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Return<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="return.php">Query</a></li>
+            <li><a href="return_book.php">Return</a></li>
+          </ul>
+        </li>
+
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Add<b class="caret"></b></a>
           <ul class="dropdown-menu">

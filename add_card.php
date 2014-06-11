@@ -45,9 +45,11 @@
              if ($_POST['type']) $type='Teacher';
              else $type='Student';
              $sql = "INSERT INTO card VALUES ('$cid','$cname','$department','$type');";
+
              $arr=mysqli_query($con,$sql);
              if (mysqli_affected_rows($con)==1) echo "<script>alert('Add card succeed!');window.location='add_card.php'</script>";
              else echo "<script>alert('Add card failed! Please check your input.');window.location='add_card.php';</script>";
+          
           }
         ?>
 

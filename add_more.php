@@ -24,68 +24,43 @@
     <div class="container">
         <div class="col-sm-12 page-header" align="left">
           <div class="demo-headline" style="color:#1ABC9C">
-            <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add &nbsp;More &nbsp;Book</h2>
+            <h2>Import &nbsp;New &nbsp;Books</h2>
           </div>
           <!-- <button type="submit" class="btn btn-primary btn-wide" name="submit" value="submit">Import</button> -->
         </div>
-    
+        <body>
         <?php
-        if(isset($_POST['submit'])){
-          $input_oldpassword = $_POST['input_oldpassword'];
-          $input_newpassword = $_POST['input_newpassword'];
-          $repeat_newpassword = $_POST['repeat_newpassword'];
+          if (isset($_POST['import']))
+          {
+              $con=mysqli_connect("127.0.0.1","root","1324","library2");
+              $file = fopen("books.txt", "r") or exit("Unable to open file!");
 
-          if($input_newpassword != $repeat_newpassword){
-            echo "new passwords are different!";
-          }
-
-          else{
-            require_once 'connectvars.php'; 
-            $dbc = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
-            $user_id = mysqli_real_escape_string($dbc,trim($_SESSION['user_id']));
-            $query = "SELECT password FROM accounts WHERE user_id = '$user_id'";
-            $data = mysqli_query($dbc,$query);
-            if(mysqli_num_rows($data)==1){
-              $row = mysqli_fetch_array($data);
-              $oldpassword = $row['password'];
-              $md5_oldpassword = md5("$input_oldpassword");
-              echo $md5_oldpassword;
-              if($oldpassword == $md5_oldpassword){
-                $md5_newpassword = md5("$input_newpassword");
-                $user_id = $_SESSION['user_id'];
-                $query = "UPDATE accounts SET password = '$md5_newpassword' WHERE user_id = '$user_id'";
-                $data = mysqli_query($dbc,$query) or die ("update accounts failed!");
+              while(!feof($file))
+              {
+                  $sql=fgets($file);
+                  echo strlen($sql)." ";
+                  // if ($sql!="")   //读到文件结尾的空行时会报错
+                    $arr=mysqli_query($con,$sql);
               }
-            }
+              fclose($file);
+              mysqli_query($con,$sql);
+              echo "<script>alert('Import Finished!');window.location=''</script>";
           }
-        }
         ?>
-
-        <!-- page body -->
-        <!-- <div class="row clearfix"> -->
-
-          <!-- <div class="col-md-4 column"> -->
-          <!-- <form role="form" action="change_password.php" method="POST"> -->
-          <!-- 这部分的只实现了前端yet -->
-          <form class="form-horizontal" action="add_more.php" method="POST">
-            
-            <div class="col-sm-6" align="left">
-              <p>This page is created for import more books. If you'd like that, just click the following [Import] button. </p>
-            </div>
-            <div class="col-sm-2" align='right'>
-              <button type="submit" class="btn btn-primary btn-wide" name="submit" value="submit">Import</button>
-              
-              <!-- <button type="reset" class="btn btn-default btn-wide" name="reset" value="reset">Reset</button> -->
-            </div> 
-          </form>
-          <!-- <form class="form-horizontal" id='9'> -->
-
-          <!-- </div>
-        </div>
-      </div>-->
+        <form class="form-horizontal" action="add_more.php" method="post">
+          
+          <div class="col-sm-7" align="left">
+            <p>This page is created for import more NEW books. If you'd like that, just click the following [Import] button. </p>
+          </div>
+          <div class="col-sm-2" align='right'>
+            <button type="submit" class="btn btn-primary btn-wide" name="import" value="submit">Import</button>
+          </div> 
+        </form>
     </div> 
+    
     <!-- page footer-->
-    <br/><?php include "footer.php"; ?>
+    
+    <?php include "footer.php"; ?>
 
     <!-- Load JS here for greater good =============================-->
     <script src="js/jquery-1.8.3.min.js"></script>

@@ -86,7 +86,6 @@
               &nbsp;&nbsp;&nbsp;
               <button type="reset" class="btn btn-default btn-wide" name="reset" value="reset">Reset</button>
              </div>
-            <!-- </div> -->
           </form>
           <!-- <form class="form-horizontal" id='9'> -->
 

@@ -40,9 +40,9 @@
                <div class="form-group"> 
                   <div class="row">
                     <div class="col-md-3 column">
-                      <span class="input-group-lg">
+                      <!-- <span class="input-group-lg"> -->
                         <select name="select_by">
-                          <option value="">Select By</option>
+                          <option value="all">Select By</option>
                           <option value="all">All</option>
                           <option value="bid">Book ID</option>
                           <option value="bname">Book Name</option>
@@ -61,7 +61,7 @@
                           <option value="year">Year</option>
                           <option value="price">Price</option>
                         </select>
-                      </span>
+                      <!-- </span> -->
                     </div>
                     <div class="col-md-7 column">
                         <div class="col-md-12 column">
@@ -126,17 +126,17 @@
               echo "<div class='container'>";
               echo "<div class='panel panel-default'>";
               echo "<div class='panel-body'>";
-              echo '<table class="table">';
+              echo '<table class="table table-striped">';
               echo '<tr>';
-              echo  "<td width='8%' align='center' >Book ID</th>";
-              echo  "<td width='18%' align='center' >Category</th>";
-              echo  "<td width='30%' align='center' >Book Name</th>";
-              echo  "<td width='19%' align='center' >Publisher</th>";
-              echo  "<td width='3%' align='center' >Year</th>";
-              echo  "<td width='20%' align='center' >Author</th>";
-              echo  "<td width='4%' align='center' >Price</th>";
-              echo  "<td width='4%' align='center' >Total</th>";
-              echo  "<td width='4%' align='center' >Stock</th>";
+              echo  "<td width='2%' align='left' >ID</th>";
+              echo  "<td width='5%' align='left' >Category</th>";
+              echo  "<td width='40%' align='left' >&nbsp;&nbsp;Name</th>";
+              echo  "<td width='29%' align='left' >Publisher</th>";
+              echo  "<td width='3%' align='left' >Year</th>";
+              echo  "<td width='15%' align='left' >Author</th>";
+              echo  "<td width='3%' align='left' >Price</th>";
+              echo  "<td width='3%' align='left' >Total</th>";
+              echo  "<td width='3%' align='left' >Stock</th>";
               echo '</tr>';
             }
             while($val=mysqli_fetch_row($arr))
@@ -144,7 +144,7 @@
                echo "<tr >";
                 for($i=0;$i<count($val);$i++)
                 {
-                        echo "<td align='center'>".$val[$i]."</td>";
+                        echo "<td align='left'>".$val[$i]."</td>";
                 }                
                 echo "</tr>";
             }

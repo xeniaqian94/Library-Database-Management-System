@@ -1,0 +1,7 @@
+INSERT INTO book VALUES('00014','Music','The History of Western Barroco','Boston College Press','2001','Julia Peterson',81.77,2,2);
+INSERT INTO book VALUES('00015','Medicine','How to Keep Fit','John Hopkins University Press','2014','Howard Watreve',131.45,2,2);
+
+
+
+
+
