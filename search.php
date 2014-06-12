@@ -82,7 +82,7 @@
                     </div>
                     <div class="col-md-2 column">
 
-                      <button type="submit" name="submit" class="btn btn-primary btn-wide">Search</button>
+                      <button type="submit" name="submit" class="btn btn-inverse btn-wide">Search</button>
                       <!-- <div class="col-md-2 column"><br /></div> -->
                       <button type="reset" class="btn btn-default btn-wide">Reset</button>
                     </div>
@@ -126,13 +126,14 @@
             if($arr)
             {
               echo "<div class='container'>";
-              echo "<div class='panel panel-default'>";
-              echo "<div class='panel-body'>";
+              echo "<div class='panel panel-info'>";
+              echo "<div class='panel panel-heading' align='center'>Search Result</div>";
+              // echo "<div class='panel panel-body>";
               echo '<table class="table table-striped">';
               echo '<tr>';
               echo  "<td width='2%' align='left' >ID</th>";
-              echo  "<td width='5%' align='left' >Category</th>";
-              echo  "<td width='37%' align='left' >&nbsp;&nbsp;Name</th>";
+              echo  "<td width='3%' align='left' >Category</th>";
+              echo  "<td width='33%' align='left' >&nbsp;&nbsp;Name</th>";
               echo  "<td width='29%' align='left' >Publisher</th>";
               echo  "<td width='3%' align='left' >Year</th>";
               echo  "<td width='15%' align='left' >Author</th>";

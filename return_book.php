@@ -45,26 +45,43 @@
                 $thisval=mysqli_fetch_row($thisarr);
               }
           }
-          if (isset($_POST['submit']))
+          else if (isset($_GET['bid']))
+          {
+            $bid=$_GET['bid'];
+            $cid=$_GET['cid'];
+            $con=mysqli_connect("127.0.0.1","root","1324","library2");
+            $aid=$_SESSION['aid'];
+            if (mysqli_num_rows(mysqli_query($con,"SELECT * FROM record WHERE bid=$bid AND cid=$cid;")))
+            {
+              $sql="DELETE FROM record WHERE bid=$bid AND cid=$cid LIMIT 1;";
+              $arr=mysqli_query($con,$sql);
+              $sql2="UPDATE book SET lastreturn = now() WHERE bid=$bid;";
+              mysqli_query($con,$sql2);
+              $sql2="UPDATE book SET stock=stock+1 WHERE bid=$bid;";
+              mysqli_query($con,$sql2);
+              echo "<script>alert('You have successfully returned one book!');window.location='return.php?cid=".$cid."&submit=submit.php'</script>";
+            }
+            else echo "<script>alert('Return Error! Please check.');window.location='return_book.php'</script>";
+
+          }
+          else if (isset($_POST['submit']))
           {
             $con=mysqli_connect("127.0.0.1","root","1324","library2");
             $bid=$_POST['bid'];
             $cid=$_POST['cid'];
             $aid=$_SESSION['aid'];
-            if (mysqli_num_rows(mysqli_query($con,"SELECT * FROM record WHERE bid LIKE '%$bid%' AND cid LIKE '%$cid%';")))
+            if (mysqli_num_rows(mysqli_query($con,"SELECT * FROM record WHERE bid=$bid AND cid=$cid;")))
             {
-              $sql="DELETE FROM record WHERE bid LIKE '%$bid%' AND cid LIKE '%$cid%' LIMIT 1;";
+              $sql="DELETE FROM record WHERE bid=$bid AND cid=$cid LIMIT 1;";
               $arr=mysqli_query($con,$sql);
-              $sql2="UPDATE book SET lastreturn = now() WHERE bid LIKE '%$bid';";
+              $sql2="UPDATE book SET lastreturn = now() WHERE bid=$bid;";
               mysqli_query($con,$sql2);
-              $sql2="UPDATE book SET stock=stock+1 WHERE bid LIKE '%$bid';";
+              $sql2="UPDATE book SET stock=stock+1 WHERE bid=$bid;";
               mysqli_query($con,$sql2);
-              echo "<script>alert('You have successfully returned one book!');window.location='return_book.php'</script>";
+              echo "<script>alert('You have successfully returned one book! Check your record now.');window.location='return.php?cid=".$cid."&submit=submit.php'</script>";
             }
-            // echo mysqli_errno($con)." ".mysqli_error($con);
             else echo "<script>alert('Return Error! Please check your input.');window.location='return_book.php'</script>";
           }
-          // if (isset($_POST['jump']) {$bid=$_POST['bid'];}
       ?>
         <!-- page body -->
           <form class="form-horizontal" action="return_book.php" method="post">          
@@ -73,10 +90,6 @@
               <div class="col-sm-5" align='left'>
                  <?php
                     if (isset($_POST["check"])) {echo "<input type='text' class='form-control' name='bid' value='".$thisbid."'></input>";}
-//                     else if ($_POST['bid']) {
-//                       // echo "<input type='text' class='form-control' name='bid' value='".$bid."'></input>";
-// echo "in here.!";
-//                     }
                     else {echo "<input type='text' class='form-control' name='bid' placeholder='Input book ID here'/>";}
                  ?>
                  <!-- <input type="text" class="form-control" name="bid" placeholder="Input book ID here"></input> -->

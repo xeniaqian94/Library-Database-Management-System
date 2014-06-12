@@ -50,12 +50,12 @@
           {
             $con=mysqli_connect("127.0.0.1","root","1324","library2");
             $cid=$_GET["cid"];
-            $sql="SELECT bid,bname,aid,bdate,due from record NATURAL JOIN book WHERE cid LIKE '%$cid%';";
+            $sql="SELECT bid,bname,aid,bdate,due from record NATURAL JOIN book WHERE cid=$cid;";
             $arr=mysqli_query($con,$sql);
             if($arr)
             {
-              // echo "<div class='container'>";
-              echo "<div class='panel panel-default'>";
+              echo "<div class='panel panel-primary'>";
+              echo'<div class="panel-heading" align="center">Borrow Record &nbsp; &nbsp;&nbsp;Card ID '.$cid.'</div>';
               echo "<div class='panel-body'>";
               echo '<table class="table table-striped">';
               echo '<tr>';
