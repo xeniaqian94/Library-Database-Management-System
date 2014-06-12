@@ -74,7 +74,7 @@
                 {
                         echo "<td align='center'>".$val[$i]."</td>";
                 }                
-                echo "<td align='center'><button type='submit' name='return' class='btn btn-inverse' href='return_book.php?bid='.$val[0].'&bdate='.$val[3].''>Return</button></td>";
+                echo "<td align='center'><a type='submit' name='return' class='btn btn-inverse' href='return_book.php?bid=".$val[0]."&cid=".$cid."&submit='>Return</a></td>";
                 echo "</tr>";
             }
             echo "</table></div></div>";

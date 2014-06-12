@@ -33,10 +33,10 @@
         </div>
         <div class="col-sm-12">&nbsp;</div>
         <?php
-          if(isset($_GET['check']))
+          if(isset($_POST['check']))
           {
               $thiscon=mysqli_connect("127.0.0.1","root","1324","library2");
-              $thisbid=$_GET["bid"];
+              $thisbid=$_POST["bid"];
               // $thissql="SELECT * FROM book WHERE bid LIKE '%$bid%';";
               $thissql="SELECT * FROM book WHERE bid LIKE '%$thisbid%';";
               $thisarr=mysqli_query($thiscon,$thissql);
@@ -45,11 +45,11 @@
                 $thisval=mysqli_fetch_row($thisarr);
               }
           }
-          if (isset($_GET['submit']))
+          if (isset($_POST['submit']))
           {
             $con=mysqli_connect("127.0.0.1","root","1324","library2");
-            $bid=$_GET['bid'];
-            $cid=$_GET['cid'];
+            $bid=$_POST['bid'];
+            $cid=$_POST['cid'];
             $aid=$_SESSION['aid'];
             if (mysqli_num_rows(mysqli_query($con,"SELECT * FROM record WHERE bid LIKE '%$bid%' AND cid LIKE '%$cid%';")))
             {
@@ -64,14 +64,19 @@
             // echo mysqli_errno($con)." ".mysqli_error($con);
             else echo "<script>alert('Return Error! Please check your input.');window.location='return_book.php'</script>";
           }
+          // if (isset($_POST['jump']) {$bid=$_POST['bid'];}
       ?>
         <!-- page body -->
-          <form class="form-horizontal" action="return_book.php" method="get">          
+          <form class="form-horizontal" action="return_book.php" method="post">          
             <div class="form-group">
               <label class="col-sm-2 lead" align='right'>Book ID</label>
               <div class="col-sm-5" align='left'>
                  <?php
-                    if (isset($_GET["check"])) {echo "<input type='text' class='form-control' name='bid' value='".$thisbid."'></input>";}
+                    if (isset($_POST["check"])) {echo "<input type='text' class='form-control' name='bid' value='".$thisbid."'></input>";}
+//                     else if ($_POST['bid']) {
+//                       // echo "<input type='text' class='form-control' name='bid' value='".$bid."'></input>";
+// echo "in here.!";
+//                     }
                     else {echo "<input type='text' class='form-control' name='bid' placeholder='Input book ID here'/>";}
                  ?>
                  <!-- <input type="text" class="form-control" name="bid" placeholder="Input book ID here"></input> -->
@@ -84,7 +89,7 @@
               <label class="col-sm-2 lead" align='right'>Book Name</label>
               <div class="col-sm-5" align='left'>
                  <?php
-                    if (isset($_GET["check"])) {echo "<input type='text' class='form-control' name='bname' value='".$thisval[2]."'></input>";}
+                    if (isset($_POST["check"])) {echo "<input type='text' class='form-control' name='bname' value='".$thisval[2]."'></input>";}
                     else {echo "<input type='text' class='form-control' name='bname' placeholder='Please click the [Check Book Name] bottom '/>";}
                  ?>
               </div>

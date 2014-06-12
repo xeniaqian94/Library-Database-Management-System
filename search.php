@@ -111,6 +111,7 @@
               {
                 $sql="SELECT * FROM book WHERE $select_by LIKE '%$keyword%' ORDER BY $order_by";
               }
+              // echo "no order.";
             }
             else 
             {
@@ -119,6 +120,7 @@
               {
                 $sql="SELECT * FROM book WHERE $select_by LIKE '%$keyword%' AND $select_by>=$upper AND $select_by<=$lower ORDER BY $order_by";
               }
+              echo "have order ".$lower." ".$upper." ";
             }
             
             $arr=mysqli_query($con,$sql);
@@ -138,6 +140,7 @@
               echo  "<td width='3%' align='left' >Price</th>";
               echo  "<td width='3%' align='left' >Total</th>";
               echo  "<td width='3%' align='left' >Stock</th>";
+              echo  "<td width='3%' align='left' >Last Return</th>";
               echo '</tr>';
             }
             while($val=mysqli_fetch_row($arr))

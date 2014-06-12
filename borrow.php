@@ -62,7 +62,7 @@
                 echo $sql3;
                 $arr3=mysqli_query($con,$sql3);
                 if ($arr2&&$arr3) echo "<script>alert('Borrow succeed!');window.location='borrow.php'</script>";
-                else echo "<script>alert('Borrow Failed! Try again.');window.location='borrow.php'</script>";
+                else echo "<script>alert('Borrow Failed! You should login first.');window.location='borrow.php'</script>";
               }
               else 
               {
