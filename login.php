@@ -37,7 +37,6 @@
           if($row = mysqli_fetch_array($result)) 
           {
             session_start();
-            // setcookie("user", "admin", time()+3600);
             $_SESSION['aid'] = $aid;
             $_SESSION['admin_name']= $row['aname'];
             echo "<script language=javascript>alert('Login Succeed !');window.location='main.php'</script>";

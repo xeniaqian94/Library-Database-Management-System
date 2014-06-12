@@ -22,8 +22,9 @@
     <!-- Fixed navbar -->
     <?php include "navbar.php" ?>    
     <div class="container">
-        <div class="col-sm-9 page-header" align="center">
-          <h2 class="demo-headline" style="color:#1ABC9C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add &nbsp;One &nbsp;Single &nbsp;Book</h2>
+        <div class="col-sm-12 page-header" align="left">
+
+          <h2 class="demo-headline" style="color:#1ABC9C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add &nbsp;One &nbsp;Single &nbsp;Book</h2>
         </div>
     </div>
         <!-- accessing database -->
@@ -43,22 +44,23 @@
               // 判断这种书图书馆之前是否已经有了
               $sql0="SELECT FROM book WHERE bid LIKE '%$bid%';";
               $arr0=mysqli_query($con,$sql0);
-              if (mysqli_affected_rows($con))
+              if (mysqli_affected_rows($con)>0)
               {
                 $sql1="UPDATE book SET stock=stock+$total WHERE bid LIKE '%$bid%';";
                 $arr1=mysqli_query($con,$sql1);
                 $sql1="UPDATE book SET total=total+$total WHERE bid LIKE '%$bid%';";
                 $arr1=mysqli_query($con,$sql1);
-                echo "<script>alert('Book already exists. Stock changed!');window.location='add_one.php'</script>";
+                echo "Book".$bid." already exists. Stock changed!";
               }
               else if (!($arr0))
               {
-                $sql = "INSERT INTO book VALUES ('$bid','$category','$bname','$publisher','$year','$author',$price,$total,$total);";
+                $sql = "INSERT INTO book VALUES ('$bid','$category','$bname','$publisher',$year,'$author',$price,$total,$total,now()-now());";
                 $arr=mysqli_query($con,$sql);
-                echo mysqli_errno($con);
-                if ($arr) echo "<script>alert('Add succeed!');window.location='add_one.php'</script>";
-                else echo "<script>alert('Add failed! Try again.');window.location='add_one.php'</script>";
+                echo mysqli_errno($con)." ".mysqli_error($con);
+                if ($arr) echo "Add book ".$bid." succeed!";
+                else echo "Add book ".$bid." failed! Try again.";
               }
+              echo "<script>alert('Add book finished.');window.location='add_one.php'</script>";
             }
         ?>
 

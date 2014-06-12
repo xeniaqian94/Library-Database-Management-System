@@ -32,19 +32,49 @@
         <?php
           if (isset($_POST['import']))
           {
-              $con=mysqli_connect("127.0.0.1","root","1324","library2");
+              $con=mysql_connect("127.0.0.1","root","1324");
+              $db_selected = mysql_select_db("library2",$con);
               $file = fopen("books.txt", "r") or exit("Unable to open file!");
 
               while(!feof($file))
               {
                   $sql=fgets($file);
-                  echo strlen($sql)." ";
-                  // if ($sql!="")   //读到文件结尾的空行时会报错
-                    $arr=mysqli_query($con,$sql);
-              }
-              fclose($file);
-              mysqli_query($con,$sql);
-              echo "<script>alert('Import Finished!');window.location=''</script>";
+                  $array0=explode(")",$sql);
+                  $array1=explode("(",$array0[0]); 
+                  $array=explode(",",$array1[1]);
+                  $bid=$array[0];
+                  $category=$array[1];
+                  $bname=$array[2];
+                  $publisher=$array[3];
+                  $year=intval($array[4]);
+                  $author=$array[5];
+                  $price=floatval($array[6]);
+                  $total=intval($array[7]);
+                  $sql0="SELECT * FROM book WHERE bid=$bid;";
+                  $arr0=mysql_query($sql0,$con);
+                  // echo mysql_num_rows($arr0);
+
+                  if (mysql_num_rows($arr0)==1) //已经有这么一本书
+                  {
+                    $sql1="UPDATE book SET stock=stock+$total WHERE bid=$bid;";
+                    $arr1=mysql_query($sql1,$con);
+                    $sql1="UPDATE book SET total=total+$total WHERE bid=$bid;";
+                    $arr1=mysql_query($sql1,$con);
+                    echo "<script>alert('Book already exists. Stock changed!');window.location='add_more.php'</script>";
+                  }
+                  else if (mysql_num_rows($arr0)==0)
+                  {
+                    $sql = "INSERT INTO book VALUES ('$bid','$category','$bname','$publisher',$year,'$author',$price,$total,$total,now()-now());";
+                    $arr=mysql_query($sql,$con);
+                    // echo mysqli_errno($con)." ".mysqli_error($con);
+                    if ($arr) echo "<script>alert('Add succeed!');window.location='add_more.php'</script>";
+                    else echo mysql_errno($con)." ".mysql_error($con);
+                    // else echo "<script>alert('Add failed! Try again.');window.location='add_more.php'</script>";
+                  }
+                  }
+                  fclose($file);
+              // mysqli_query($con,$sql);
+              // echo "<script>alert('Import Finished!');window.location=''</script>";
           }
         ?>
         <form class="form-horizontal" action="add_more.php" method="post">

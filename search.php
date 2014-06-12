@@ -28,7 +28,7 @@
     <!-- Fixed navbar -->
     <?php include "navbar.php" ?>    
     <div class="container">
-        <div class="col-sm-5 page-header" align="left">
+        <div class="col-sm-12 page-header" align="left">
           <h2 class="demo-headline" style="color:#1ABC9C">
             Search &nbsp; Book</h2>
         </div>
@@ -106,21 +106,20 @@
             $keyword=$_GET["keyword"];
             if (!($lower|$upper))
             {
-              if ($select_by=="all") $sql="SELECT * FROM book ORDER BY $order_by;";
-              else
+              if (!($keyword)) $sql="SELECT * FROM book ORDER BY $order_by;"; //米有keyword
+              else 
               {
-                $sql="SELECT * FROM book WHERE $select_by LIKE '%$keyword%' ORDER BY $order_by";
+                $sql="SELECT * FROM book WHERE $select_by=$keyword ORDER BY $order_by"; //有keyword
               }
-              // echo "no order.";
             }
             else 
             {
-              if ($select_by=="all") $sql="SELECT * FROM book WHERE $select_by>=$upper AND $select_by<=$lower ORDER BY $order_by;";
-              else
+              if ($select_by=="all") $sql="SELECT * FROM book WHERE bname<=$upper AND bname>=$lower ORDER BY $order_by;";
+              else 
               {
-                $sql="SELECT * FROM book WHERE $select_by LIKE '%$keyword%' AND $select_by>=$upper AND $select_by<=$lower ORDER BY $order_by";
+                $sql="SELECT * FROM book WHERE $select_by<=$upper AND $select_by>=$lower ORDER BY $order_by";
               }
-              echo "have order ".$lower." ".$upper." ";
+              // echo "have order ".$lower." ".$upper." ";
             }
             
             $arr=mysqli_query($con,$sql);
@@ -133,26 +132,27 @@
               echo '<tr>';
               echo  "<td width='2%' align='left' >ID</th>";
               echo  "<td width='5%' align='left' >Category</th>";
-              echo  "<td width='40%' align='left' >&nbsp;&nbsp;Name</th>";
+              echo  "<td width='37%' align='left' >&nbsp;&nbsp;Name</th>";
               echo  "<td width='29%' align='left' >Publisher</th>";
               echo  "<td width='3%' align='left' >Year</th>";
               echo  "<td width='15%' align='left' >Author</th>";
               echo  "<td width='3%' align='left' >Price</th>";
               echo  "<td width='3%' align='left' >Total</th>";
               echo  "<td width='3%' align='left' >Stock</th>";
-              echo  "<td width='3%' align='left' >Last Return</th>";
+              echo  "<td width='6%' align='left' >Last Return</th>";
               echo '</tr>';
+              while($val=mysqli_fetch_row($arr))
+              {
+                 echo "<tr >";
+                  for($i=0;$i<count($val);$i++)
+                  {
+                          echo "<td align='left'>".$val[$i]."</td>";
+                  }                
+                  echo "</tr>";
+              }
+              echo "</table></div></div></div>";
             }
-            while($val=mysqli_fetch_row($arr))
-            {
-               echo "<tr >";
-                for($i=0;$i<count($val);$i++)
-                {
-                        echo "<td align='left'>".$val[$i]."</td>";
-                }                
-                echo "</tr>";
-            }
-            echo "</table></div></div></div>";
+            else echo "sql failed.".mysqli_errno($con)." ".mysqli_error($con)."";
           }
       ?>
     

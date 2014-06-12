@@ -23,16 +23,11 @@
     <!-- Fixed navbar -->
     <?php include "navbar.php" ?>    
     <div class="container">
-        <div class="col-sm-3 page-header" align="right">
+        <div class="col-sm-12 page-header" align="left">
           <h2 class="demo-headline" style="color:#1ABC9C">
-            Add</h2>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add &nbsp;&nbsp;Card</h2>
         </div>
-        <div class="col-sm-5 page-header" align="left">
-          <h2 class="demo-headline" style="color:#1ABC9C">
-            Card</h2>
-        </div>
-    </div>
-        <!-- accessing database -->
+    </div>        <!-- accessing database -->
     <div class="container">
         <?php
           if(isset($_POST['submit']))
