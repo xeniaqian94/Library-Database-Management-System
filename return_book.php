@@ -28,11 +28,16 @@
     </div>
         <!-- accessing database -->
     <div class="container">
+        
         <div class="col-sm-7">
+          <div class="col-sm-10">
+
+          </div>
           <div class="col-sm-10" align="left"><p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please note that it returns ONE book at a time!</p></div>
         </div>
         <div class="col-sm-12">&nbsp;</div>
         <?php
+
           if(isset($_POST['check']))
           {
               $thiscon=mysqli_connect("127.0.0.1","root","1324","library2");
@@ -61,7 +66,8 @@
               mysqli_query($con,$sql2);
               echo "<script>alert('You have successfully returned one book!');window.location='return.php?cid=".$cid."&submit=submit.php'</script>";
             }
-            else echo "<script>alert('Return Error! Please check.');window.location='return_book.php'</script>";
+            else  
+              echo "<script>alert('Return Error! Please check.');window.location='return_book.php'</script>";
 
           }
           else if (isset($_POST['submit']))
