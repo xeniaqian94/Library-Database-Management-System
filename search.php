@@ -98,7 +98,8 @@
       <?php
           if (isset($_GET["submit"]))
           {
-            $con=mysqli_connect("127.0.0.1","root","1324","library2");
+            include "connectvar.php";
+            //$con=mysqli_connect("127.0.0.1","root","1324","library2");
             $select_by=$_GET["select_by"];
             $order_by=$_GET["order_by"];
             $lower=$_GET["lower"];

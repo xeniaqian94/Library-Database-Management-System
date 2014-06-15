@@ -48,7 +48,8 @@
       <?php
           if (isset($_GET["submit"]))
           {
-            $con=mysqli_connect("127.0.0.1","root","1324","library2");
+            include "connectvar.php";
+            //$con=mysqli_connect("127.0.0.1","root","1324","library2");
             $cid=$_GET["cid"];
             $sql="SELECT bid,bname,aid,bdate,due from record NATURAL JOIN book WHERE cid=$cid;";
             $arr=mysqli_query($con,$sql);

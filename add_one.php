@@ -32,7 +32,8 @@
         <?php
             if(isset($_POST['submit']))
             {
-              $con=mysqli_connect("127.0.0.1","root","1324","library2");
+              include "connectvar.php";
+              //$con=mysqli_connect("127.0.0.1","root","1324","library2");
               $bid=$_POST["bid"];
               $category=$_POST["category"];
               $bname=$_POST["bname"];

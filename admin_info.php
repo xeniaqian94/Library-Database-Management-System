@@ -35,7 +35,8 @@
         </div>
         <?php 
           // session_start();
-          $con = mysqli_connect('127.0.0.1','root','1324','library2');
+          include "connectvar.php";
+          //$con = mysqli_connect('127.0.0.1','root','1324','library2');
           $aid = $_SESSION['aid'];
           $sql = "SELECT * FROM admin WHERE aid = '$aid';";
           $arr = mysqli_query($con,$sql);

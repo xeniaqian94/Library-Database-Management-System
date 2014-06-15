@@ -32,7 +32,8 @@
         <?php
           if (isset($_POST['import']))
           {
-              $con=mysql_connect("127.0.0.1","root","1324");
+              include "connectvar.php";
+              //$con=mysql_connect("127.0.0.1","root","1324");
               $db_selected = mysql_select_db("library2",$con);
               $file = fopen("books.txt", "r") or exit("Unable to open file!");
 

@@ -40,7 +40,8 @@
 
           if(isset($_POST['check']))
           {
-              $thiscon=mysqli_connect("127.0.0.1","root","1324","library2");
+              include "connectvar.php";
+              $thiscon=$con;//mysqli_connect("127.0.0.1","root","1324","library2");
               $thisbid=$_POST["bid"];
               // $thissql="SELECT * FROM book WHERE bid LIKE '%$bid%';";
               $thissql="SELECT * FROM book WHERE bid LIKE '%$thisbid%';";
@@ -54,7 +55,8 @@
           {
             $bid=$_GET['bid'];
             $cid=$_GET['cid'];
-            $con=mysqli_connect("127.0.0.1","root","1324","library2");
+            include "connectvar.php";
+            //$con=mysqli_connect("127.0.0.1","root","1324","library2");
             $aid=$_SESSION['aid'];
             if (mysqli_num_rows(mysqli_query($con,"SELECT * FROM record WHERE bid=$bid AND cid=$cid;")))
             {
@@ -72,7 +74,8 @@
           }
           else if (isset($_POST['submit']))
           {
-            $con=mysqli_connect("127.0.0.1","root","1324","library2");
+            include "connectvar.php";
+            //$con=mysqli_connect("127.0.0.1","root","1324","library2");
             $bid=$_POST['bid'];
             $cid=$_POST['cid'];
             $aid=$_SESSION['aid'];

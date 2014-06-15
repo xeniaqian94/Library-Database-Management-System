@@ -30,7 +30,8 @@
     <div class="container">
       <?php 
         if(isset($_POST['submit'])){
-          $con=mysqli_connect("127.0.0.1","root","1324","library2");
+          include "connectvar.php";
+          //$con=mysqli_connect("127.0.0.1","root","1324","library2");
           $aid=$_POST['aid'];
           $password=$_POST['password'];
           $result = mysqli_query($con,"SELECT * FROM admin WHERE aid='$aid' AND password='$password';");

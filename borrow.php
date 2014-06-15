@@ -32,7 +32,8 @@
         <?php
           if(isset($_GET['check']))
           {
-              $thiscon=mysqli_connect("127.0.0.1","root","1324","library2");
+              include "connectvar.php";
+              $thiscon=$con;//mysqli_connect("127.0.0.1","root","1324","library2"); 理论上来说两个地方都用$con是不会冲突的
               $thisbid=$_GET["bid"];
               // $thissql="SELECT * FROM book WHERE bid LIKE '%$bid%';";
               $thissql="SELECT * FROM book WHERE bid LIKE '%$thisbid%';";
